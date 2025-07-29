@@ -1,0 +1,221 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/db/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccommodationType {
+  HOTEL
+  RESORT
+  INN
+  APARTMENT
+}
+
+enum UserRoleType {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+model User {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at DateTime  @default(now()) @db.Timestamptz(6)
+  deleted_at DateTime? @db.Timestamptz(6)
+  first_name String?
+  last_name  String?
+  email      String    @unique
+
+  role UserRoleType @default(USER)
+
+  // Indexes
+  @@index([created_at])
+  @@index([updated_at])
+  @@index([deleted_at])
+  @@index([first_name])
+  @@index([last_name])
+  @@index([email])
+}
+
+model Account {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at DateTime  @default(now()) @db.Timestamptz(6)
+  deleted_at DateTime? @db.Timestamptz(6)
+  email      String    @unique
+  password   String
+
+  refresh_token RefreshToken[]
+}
+
+model RefreshToken {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  token      String
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at DateTime  @default(now()) @db.Timestamptz(6)
+  deleted_at DateTime? @db.Timestamptz(6)
+
+  account_id String @db.Uuid
+
+  account Account @relation(fields: [account_id], references: [id], onDelete: Cascade)
+
+  @@index([token])
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  completed   Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Destination {
+  id String @id @default(cuid())
+
+  // Core Fields
+  name        String @db.VarChar(255)
+  description String @db.Text
+
+  // Contact Information (Validated Lengths)
+  email    String? @db.VarChar(320) // Max email length per RFC
+  phone    String? @db.VarChar(20) // Supports international numbers
+  website  String? @db.VarChar(2048) // Max URL length in most browsers
+  facebook String? @db.VarChar(255) // Standard social media handle length
+
+  // Location
+  address   String? @db.Text // Longer addresses allowed
+  latitude  Float? // 6 decimal places (~10cm precision)
+  longitude Float?
+
+  // Media (URLs)
+  three_sixty_imageUrl String? @db.VarChar(2048)
+  imageUrl_1           String? @db.VarChar(2048)
+  imageUrl_2           String? @db.VarChar(2048)
+  imageUrl_3           String? @db.VarChar(2048)
+  imageUrl_4           String? @db.VarChar(2048)
+  imageUrl_5           String? @db.VarChar(2048)
+  videoUrl             String? @db.VarChar(2048)
+
+  // Statistics
+  count Int? @default(0)
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  // Optional: Add @@unique constraints if needed
+  // @@unique([email]) 
+
+  // Indexes
+  @@index([name])
+  @@index([email]) // For user lookups
+  @@index([latitude, longitude]) // For geo queries
+}
+
+model Accommodation {
+  id String @id @default(cuid())
+
+  // Core Fields
+  name        String            @db.VarChar(255)
+  description String            @db.Text
+  type        AccommodationType // Enum for accommodation type
+
+  // Contact Information (Validated Lengths)
+  email     String? @db.VarChar(320)
+  phone     String? @db.VarChar(20)
+  website   String? @db.VarChar(2048)
+  facebook  String? @db.VarChar(255)
+  // Location
+  address   String? @db.Text
+  latitude  Float?
+  longitude Float?
+
+  // Media (URLs)
+  three_sixty_imageUrl String? @db.VarChar(2048)
+  imageUrl_1           String? @db.VarChar(2048)
+  imageUrl_2           String? @db.VarChar(2048)
+  imageUrl_3           String? @db.VarChar(2048)
+  imageUrl_4           String? @db.VarChar(2048)
+  imageUrl_5           String? @db.VarChar(2048)
+  videoUrl             String? @db.VarChar(2048)
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  // Optional: Add @@unique constraints if needed
+  // @@unique([email]) 
+
+  // Indexes
+  @@index([name])
+  @@index([email]) // For user lookups
+  @@index([latitude, longitude]) // For geo queries
+}
+
+model WaterTransportation {
+  id                      String @id @default(cuid())
+  name                    String @db.VarChar(255)
+  description             String @db.Text
+  guidelines_and_policies String @db.Text
+  rebooking_supercharges  String @db.Text
+  refund_policy           String @db.Text
+  duration                Int?   @default(0)
+
+  expected_fee   Float
+  departure_days Json
+  departure_time String @db.Text
+
+  imageUrl_1 String? @db.VarChar(2048)
+  imageUrl_2 String? @db.VarChar(2048)
+  imageUrl_3 String? @db.VarChar(2048)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([name])
+}
+
+model Restaurant {
+  id          String  @id @default(cuid())
+  name        String  @db.VarChar(255)
+  description String  @db.Text
+  address     String? @db.Text // Longer addresses allowed
+
+  latitude  Float? // 6 decimal places (~10cm precision)
+  longitude Float?
+
+  email    String? @db.VarChar(320) // Max email length per RFC
+  phone    String? @db.VarChar(20) // Supports international numbers
+  website  String? @db.VarChar(2048) // Max URL length in most browsers
+  facebook String? @db.VarChar(255) // Standard social media handle length
+
+  // Media (URLs)
+  three_sixty_imageUrl String? @db.VarChar(2048)
+  imageUrl_1           String? @db.VarChar(2048)
+  imageUrl_2           String? @db.VarChar(2048)
+  imageUrl_3           String? @db.VarChar(2048)
+  imageUrl_4           String? @db.VarChar(2048)
+  imageUrl_5           String? @db.VarChar(2048)
+  videoUrl             String? @db.VarChar(2048)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([name])
+}

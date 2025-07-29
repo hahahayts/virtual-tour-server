@@ -1,0 +1,28 @@
+PATCH  http://localhost:3000/api/tasks/9223aa4c-febf-4458-82e3-f01a70835393
+Content-Type: application/json
+
+{
+    "name": "Task changed",
+    "description": "Task description",
+    "completed":false
+}
+
+###
+POST  http://localhost:3000/api/tasks
+Content-Type: application/json
+
+{
+    "name": "Task 4",
+    "description": "Task description",
+    "completed": true
+}
+
+###
+
+GET  http://localhost:3000/api/tasks
+###
+
+GET  http://localhost:3000/api/tasks/9223aa4c-febf-4458-82e3-f01a70835393
+
+
+
