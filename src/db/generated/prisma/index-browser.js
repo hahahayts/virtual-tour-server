@@ -248,6 +248,24 @@ exports.Prisma.RestaurantScalarFieldEnum = {
   deletedAt: 'deletedAt'
 };
 
+exports.Prisma.LandTransportationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  vehicleType: 'vehicleType',
+  capacity: 'capacity',
+  operator: 'operator',
+  contactNumber: 'contactNumber',
+  baseFee: 'baseFee',
+  feeDescription: 'feeDescription',
+  imageUrl_1: 'imageUrl_1',
+  imageUrl_2: 'imageUrl_2',
+  imageUrl_3: 'imageUrl_3',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -293,7 +311,8 @@ exports.Prisma.ModelName = {
   Destination: 'Destination',
   Accommodation: 'Accommodation',
   WaterTransportation: 'WaterTransportation',
-  Restaurant: 'Restaurant'
+  Restaurant: 'Restaurant',
+  LandTransportation: 'LandTransportation'
 };
 
 /**

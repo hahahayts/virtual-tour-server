@@ -44,7 +44,7 @@ export const createDestinationHandler: AppRouteHandler<
     const data = c.req.valid("json");
 
     const newDestination = await prisma.destination.create({
-      data: data,
+      data,
     });
 
     return c.json(newDestination, 200);
@@ -59,9 +59,6 @@ export const updateDestinationHandler: AppRouteHandler<
   try {
     const { id } = c.req.valid("param");
     const data = c.req.valid("json");
-
-   
-
 
     const updatedDestination = await prisma.destination.update({
       where: { id },

@@ -219,3 +219,30 @@ model Restaurant {
 
   @@index([name])
 }
+
+model LandTransportation {
+  id            String  @id @default(cuid())
+  name          String  @db.VarChar(100)
+  description   String  @db.Text
+  vehicleType   String? @db.VarChar(50) // e.g., "Bus", "Van", "Tricycle"
+  capacity      Int?
+  operator      String?
+  contactNumber String?
+
+  // Pricing
+  baseFee        Float?
+  feeDescription String? @db.Text
+
+  // Media
+
+  imageUrl_1 String? @db.VarChar(2048)
+  imageUrl_2 String? @db.VarChar(2048)
+  imageUrl_3 String? @db.VarChar(2048)
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([name])
+}

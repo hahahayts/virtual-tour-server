@@ -53,6 +53,11 @@ export type WaterTransportation = $Result.DefaultSelection<Prisma.$WaterTranspor
  * 
  */
 export type Restaurant = $Result.DefaultSelection<Prisma.$RestaurantPayload>
+/**
+ * Model LandTransportation
+ * 
+ */
+export type LandTransportation = $Result.DefaultSelection<Prisma.$LandTransportationPayload>
 
 /**
  * Enums
@@ -290,6 +295,16 @@ export class PrismaClient<
     * ```
     */
   get restaurant(): Prisma.RestaurantDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.landTransportation`: Exposes CRUD operations for the **LandTransportation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LandTransportations
+    * const landTransportations = await prisma.landTransportation.findMany()
+    * ```
+    */
+  get landTransportation(): Prisma.LandTransportationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -737,7 +752,8 @@ export namespace Prisma {
     Destination: 'Destination',
     Accommodation: 'Accommodation',
     WaterTransportation: 'WaterTransportation',
-    Restaurant: 'Restaurant'
+    Restaurant: 'Restaurant',
+    LandTransportation: 'LandTransportation'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -756,7 +772,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "refreshToken" | "task" | "destination" | "accommodation" | "waterTransportation" | "restaurant"
+      modelProps: "user" | "account" | "refreshToken" | "task" | "destination" | "accommodation" | "waterTransportation" | "restaurant" | "landTransportation"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1352,6 +1368,80 @@ export namespace Prisma {
           }
         }
       }
+      LandTransportation: {
+        payload: Prisma.$LandTransportationPayload<ExtArgs>
+        fields: Prisma.LandTransportationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LandTransportationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LandTransportationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload>
+          }
+          findFirst: {
+            args: Prisma.LandTransportationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LandTransportationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload>
+          }
+          findMany: {
+            args: Prisma.LandTransportationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload>[]
+          }
+          create: {
+            args: Prisma.LandTransportationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload>
+          }
+          createMany: {
+            args: Prisma.LandTransportationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LandTransportationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload>[]
+          }
+          delete: {
+            args: Prisma.LandTransportationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload>
+          }
+          update: {
+            args: Prisma.LandTransportationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload>
+          }
+          deleteMany: {
+            args: Prisma.LandTransportationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LandTransportationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LandTransportationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload>[]
+          }
+          upsert: {
+            args: Prisma.LandTransportationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LandTransportationPayload>
+          }
+          aggregate: {
+            args: Prisma.LandTransportationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLandTransportation>
+          }
+          groupBy: {
+            args: Prisma.LandTransportationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LandTransportationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LandTransportationCountArgs<ExtArgs>
+            result: $Utils.Optional<LandTransportationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1444,6 +1534,7 @@ export namespace Prisma {
     accommodation?: AccommodationOmit
     waterTransportation?: WaterTransportationOmit
     restaurant?: RestaurantOmit
+    landTransportation?: LandTransportationOmit
   }
 
   /* Types for Logging */
@@ -10651,6 +10742,1169 @@ export namespace Prisma {
 
 
   /**
+   * Model LandTransportation
+   */
+
+  export type AggregateLandTransportation = {
+    _count: LandTransportationCountAggregateOutputType | null
+    _avg: LandTransportationAvgAggregateOutputType | null
+    _sum: LandTransportationSumAggregateOutputType | null
+    _min: LandTransportationMinAggregateOutputType | null
+    _max: LandTransportationMaxAggregateOutputType | null
+  }
+
+  export type LandTransportationAvgAggregateOutputType = {
+    capacity: number | null
+    baseFee: number | null
+  }
+
+  export type LandTransportationSumAggregateOutputType = {
+    capacity: number | null
+    baseFee: number | null
+  }
+
+  export type LandTransportationMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    vehicleType: string | null
+    capacity: number | null
+    operator: string | null
+    contactNumber: string | null
+    baseFee: number | null
+    feeDescription: string | null
+    imageUrl_1: string | null
+    imageUrl_2: string | null
+    imageUrl_3: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type LandTransportationMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    vehicleType: string | null
+    capacity: number | null
+    operator: string | null
+    contactNumber: string | null
+    baseFee: number | null
+    feeDescription: string | null
+    imageUrl_1: string | null
+    imageUrl_2: string | null
+    imageUrl_3: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type LandTransportationCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    vehicleType: number
+    capacity: number
+    operator: number
+    contactNumber: number
+    baseFee: number
+    feeDescription: number
+    imageUrl_1: number
+    imageUrl_2: number
+    imageUrl_3: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    _all: number
+  }
+
+
+  export type LandTransportationAvgAggregateInputType = {
+    capacity?: true
+    baseFee?: true
+  }
+
+  export type LandTransportationSumAggregateInputType = {
+    capacity?: true
+    baseFee?: true
+  }
+
+  export type LandTransportationMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    vehicleType?: true
+    capacity?: true
+    operator?: true
+    contactNumber?: true
+    baseFee?: true
+    feeDescription?: true
+    imageUrl_1?: true
+    imageUrl_2?: true
+    imageUrl_3?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type LandTransportationMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    vehicleType?: true
+    capacity?: true
+    operator?: true
+    contactNumber?: true
+    baseFee?: true
+    feeDescription?: true
+    imageUrl_1?: true
+    imageUrl_2?: true
+    imageUrl_3?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type LandTransportationCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    vehicleType?: true
+    capacity?: true
+    operator?: true
+    contactNumber?: true
+    baseFee?: true
+    feeDescription?: true
+    imageUrl_1?: true
+    imageUrl_2?: true
+    imageUrl_3?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    _all?: true
+  }
+
+  export type LandTransportationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LandTransportation to aggregate.
+     */
+    where?: LandTransportationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LandTransportations to fetch.
+     */
+    orderBy?: LandTransportationOrderByWithRelationInput | LandTransportationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LandTransportationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LandTransportations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LandTransportations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LandTransportations
+    **/
+    _count?: true | LandTransportationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LandTransportationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LandTransportationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LandTransportationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LandTransportationMaxAggregateInputType
+  }
+
+  export type GetLandTransportationAggregateType<T extends LandTransportationAggregateArgs> = {
+        [P in keyof T & keyof AggregateLandTransportation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLandTransportation[P]>
+      : GetScalarType<T[P], AggregateLandTransportation[P]>
+  }
+
+
+
+
+  export type LandTransportationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LandTransportationWhereInput
+    orderBy?: LandTransportationOrderByWithAggregationInput | LandTransportationOrderByWithAggregationInput[]
+    by: LandTransportationScalarFieldEnum[] | LandTransportationScalarFieldEnum
+    having?: LandTransportationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LandTransportationCountAggregateInputType | true
+    _avg?: LandTransportationAvgAggregateInputType
+    _sum?: LandTransportationSumAggregateInputType
+    _min?: LandTransportationMinAggregateInputType
+    _max?: LandTransportationMaxAggregateInputType
+  }
+
+  export type LandTransportationGroupByOutputType = {
+    id: string
+    name: string
+    description: string
+    vehicleType: string | null
+    capacity: number | null
+    operator: string | null
+    contactNumber: string | null
+    baseFee: number | null
+    feeDescription: string | null
+    imageUrl_1: string | null
+    imageUrl_2: string | null
+    imageUrl_3: string | null
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    _count: LandTransportationCountAggregateOutputType | null
+    _avg: LandTransportationAvgAggregateOutputType | null
+    _sum: LandTransportationSumAggregateOutputType | null
+    _min: LandTransportationMinAggregateOutputType | null
+    _max: LandTransportationMaxAggregateOutputType | null
+  }
+
+  type GetLandTransportationGroupByPayload<T extends LandTransportationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LandTransportationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LandTransportationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LandTransportationGroupByOutputType[P]>
+            : GetScalarType<T[P], LandTransportationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LandTransportationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    vehicleType?: boolean
+    capacity?: boolean
+    operator?: boolean
+    contactNumber?: boolean
+    baseFee?: boolean
+    feeDescription?: boolean
+    imageUrl_1?: boolean
+    imageUrl_2?: boolean
+    imageUrl_3?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["landTransportation"]>
+
+  export type LandTransportationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    vehicleType?: boolean
+    capacity?: boolean
+    operator?: boolean
+    contactNumber?: boolean
+    baseFee?: boolean
+    feeDescription?: boolean
+    imageUrl_1?: boolean
+    imageUrl_2?: boolean
+    imageUrl_3?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["landTransportation"]>
+
+  export type LandTransportationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    vehicleType?: boolean
+    capacity?: boolean
+    operator?: boolean
+    contactNumber?: boolean
+    baseFee?: boolean
+    feeDescription?: boolean
+    imageUrl_1?: boolean
+    imageUrl_2?: boolean
+    imageUrl_3?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["landTransportation"]>
+
+  export type LandTransportationSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    vehicleType?: boolean
+    capacity?: boolean
+    operator?: boolean
+    contactNumber?: boolean
+    baseFee?: boolean
+    feeDescription?: boolean
+    imageUrl_1?: boolean
+    imageUrl_2?: boolean
+    imageUrl_3?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }
+
+  export type LandTransportationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "vehicleType" | "capacity" | "operator" | "contactNumber" | "baseFee" | "feeDescription" | "imageUrl_1" | "imageUrl_2" | "imageUrl_3" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["landTransportation"]>
+
+  export type $LandTransportationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LandTransportation"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string
+      vehicleType: string | null
+      capacity: number | null
+      operator: string | null
+      contactNumber: string | null
+      baseFee: number | null
+      feeDescription: string | null
+      imageUrl_1: string | null
+      imageUrl_2: string | null
+      imageUrl_3: string | null
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+    }, ExtArgs["result"]["landTransportation"]>
+    composites: {}
+  }
+
+  type LandTransportationGetPayload<S extends boolean | null | undefined | LandTransportationDefaultArgs> = $Result.GetResult<Prisma.$LandTransportationPayload, S>
+
+  type LandTransportationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LandTransportationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LandTransportationCountAggregateInputType | true
+    }
+
+  export interface LandTransportationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LandTransportation'], meta: { name: 'LandTransportation' } }
+    /**
+     * Find zero or one LandTransportation that matches the filter.
+     * @param {LandTransportationFindUniqueArgs} args - Arguments to find a LandTransportation
+     * @example
+     * // Get one LandTransportation
+     * const landTransportation = await prisma.landTransportation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LandTransportationFindUniqueArgs>(args: SelectSubset<T, LandTransportationFindUniqueArgs<ExtArgs>>): Prisma__LandTransportationClient<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LandTransportation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LandTransportationFindUniqueOrThrowArgs} args - Arguments to find a LandTransportation
+     * @example
+     * // Get one LandTransportation
+     * const landTransportation = await prisma.landTransportation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LandTransportationFindUniqueOrThrowArgs>(args: SelectSubset<T, LandTransportationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LandTransportationClient<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LandTransportation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LandTransportationFindFirstArgs} args - Arguments to find a LandTransportation
+     * @example
+     * // Get one LandTransportation
+     * const landTransportation = await prisma.landTransportation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LandTransportationFindFirstArgs>(args?: SelectSubset<T, LandTransportationFindFirstArgs<ExtArgs>>): Prisma__LandTransportationClient<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LandTransportation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LandTransportationFindFirstOrThrowArgs} args - Arguments to find a LandTransportation
+     * @example
+     * // Get one LandTransportation
+     * const landTransportation = await prisma.landTransportation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LandTransportationFindFirstOrThrowArgs>(args?: SelectSubset<T, LandTransportationFindFirstOrThrowArgs<ExtArgs>>): Prisma__LandTransportationClient<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LandTransportations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LandTransportationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LandTransportations
+     * const landTransportations = await prisma.landTransportation.findMany()
+     * 
+     * // Get first 10 LandTransportations
+     * const landTransportations = await prisma.landTransportation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const landTransportationWithIdOnly = await prisma.landTransportation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LandTransportationFindManyArgs>(args?: SelectSubset<T, LandTransportationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LandTransportation.
+     * @param {LandTransportationCreateArgs} args - Arguments to create a LandTransportation.
+     * @example
+     * // Create one LandTransportation
+     * const LandTransportation = await prisma.landTransportation.create({
+     *   data: {
+     *     // ... data to create a LandTransportation
+     *   }
+     * })
+     * 
+     */
+    create<T extends LandTransportationCreateArgs>(args: SelectSubset<T, LandTransportationCreateArgs<ExtArgs>>): Prisma__LandTransportationClient<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LandTransportations.
+     * @param {LandTransportationCreateManyArgs} args - Arguments to create many LandTransportations.
+     * @example
+     * // Create many LandTransportations
+     * const landTransportation = await prisma.landTransportation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LandTransportationCreateManyArgs>(args?: SelectSubset<T, LandTransportationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LandTransportations and returns the data saved in the database.
+     * @param {LandTransportationCreateManyAndReturnArgs} args - Arguments to create many LandTransportations.
+     * @example
+     * // Create many LandTransportations
+     * const landTransportation = await prisma.landTransportation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LandTransportations and only return the `id`
+     * const landTransportationWithIdOnly = await prisma.landTransportation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LandTransportationCreateManyAndReturnArgs>(args?: SelectSubset<T, LandTransportationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LandTransportation.
+     * @param {LandTransportationDeleteArgs} args - Arguments to delete one LandTransportation.
+     * @example
+     * // Delete one LandTransportation
+     * const LandTransportation = await prisma.landTransportation.delete({
+     *   where: {
+     *     // ... filter to delete one LandTransportation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LandTransportationDeleteArgs>(args: SelectSubset<T, LandTransportationDeleteArgs<ExtArgs>>): Prisma__LandTransportationClient<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LandTransportation.
+     * @param {LandTransportationUpdateArgs} args - Arguments to update one LandTransportation.
+     * @example
+     * // Update one LandTransportation
+     * const landTransportation = await prisma.landTransportation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LandTransportationUpdateArgs>(args: SelectSubset<T, LandTransportationUpdateArgs<ExtArgs>>): Prisma__LandTransportationClient<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LandTransportations.
+     * @param {LandTransportationDeleteManyArgs} args - Arguments to filter LandTransportations to delete.
+     * @example
+     * // Delete a few LandTransportations
+     * const { count } = await prisma.landTransportation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LandTransportationDeleteManyArgs>(args?: SelectSubset<T, LandTransportationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LandTransportations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LandTransportationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LandTransportations
+     * const landTransportation = await prisma.landTransportation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LandTransportationUpdateManyArgs>(args: SelectSubset<T, LandTransportationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LandTransportations and returns the data updated in the database.
+     * @param {LandTransportationUpdateManyAndReturnArgs} args - Arguments to update many LandTransportations.
+     * @example
+     * // Update many LandTransportations
+     * const landTransportation = await prisma.landTransportation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LandTransportations and only return the `id`
+     * const landTransportationWithIdOnly = await prisma.landTransportation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LandTransportationUpdateManyAndReturnArgs>(args: SelectSubset<T, LandTransportationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LandTransportation.
+     * @param {LandTransportationUpsertArgs} args - Arguments to update or create a LandTransportation.
+     * @example
+     * // Update or create a LandTransportation
+     * const landTransportation = await prisma.landTransportation.upsert({
+     *   create: {
+     *     // ... data to create a LandTransportation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LandTransportation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LandTransportationUpsertArgs>(args: SelectSubset<T, LandTransportationUpsertArgs<ExtArgs>>): Prisma__LandTransportationClient<$Result.GetResult<Prisma.$LandTransportationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LandTransportations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LandTransportationCountArgs} args - Arguments to filter LandTransportations to count.
+     * @example
+     * // Count the number of LandTransportations
+     * const count = await prisma.landTransportation.count({
+     *   where: {
+     *     // ... the filter for the LandTransportations we want to count
+     *   }
+     * })
+    **/
+    count<T extends LandTransportationCountArgs>(
+      args?: Subset<T, LandTransportationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LandTransportationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LandTransportation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LandTransportationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LandTransportationAggregateArgs>(args: Subset<T, LandTransportationAggregateArgs>): Prisma.PrismaPromise<GetLandTransportationAggregateType<T>>
+
+    /**
+     * Group by LandTransportation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LandTransportationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LandTransportationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LandTransportationGroupByArgs['orderBy'] }
+        : { orderBy?: LandTransportationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LandTransportationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLandTransportationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LandTransportation model
+   */
+  readonly fields: LandTransportationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LandTransportation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LandTransportationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LandTransportation model
+   */
+  interface LandTransportationFieldRefs {
+    readonly id: FieldRef<"LandTransportation", 'String'>
+    readonly name: FieldRef<"LandTransportation", 'String'>
+    readonly description: FieldRef<"LandTransportation", 'String'>
+    readonly vehicleType: FieldRef<"LandTransportation", 'String'>
+    readonly capacity: FieldRef<"LandTransportation", 'Int'>
+    readonly operator: FieldRef<"LandTransportation", 'String'>
+    readonly contactNumber: FieldRef<"LandTransportation", 'String'>
+    readonly baseFee: FieldRef<"LandTransportation", 'Float'>
+    readonly feeDescription: FieldRef<"LandTransportation", 'String'>
+    readonly imageUrl_1: FieldRef<"LandTransportation", 'String'>
+    readonly imageUrl_2: FieldRef<"LandTransportation", 'String'>
+    readonly imageUrl_3: FieldRef<"LandTransportation", 'String'>
+    readonly createdAt: FieldRef<"LandTransportation", 'DateTime'>
+    readonly updatedAt: FieldRef<"LandTransportation", 'DateTime'>
+    readonly deletedAt: FieldRef<"LandTransportation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LandTransportation findUnique
+   */
+  export type LandTransportationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * Filter, which LandTransportation to fetch.
+     */
+    where: LandTransportationWhereUniqueInput
+  }
+
+  /**
+   * LandTransportation findUniqueOrThrow
+   */
+  export type LandTransportationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * Filter, which LandTransportation to fetch.
+     */
+    where: LandTransportationWhereUniqueInput
+  }
+
+  /**
+   * LandTransportation findFirst
+   */
+  export type LandTransportationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * Filter, which LandTransportation to fetch.
+     */
+    where?: LandTransportationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LandTransportations to fetch.
+     */
+    orderBy?: LandTransportationOrderByWithRelationInput | LandTransportationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LandTransportations.
+     */
+    cursor?: LandTransportationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LandTransportations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LandTransportations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LandTransportations.
+     */
+    distinct?: LandTransportationScalarFieldEnum | LandTransportationScalarFieldEnum[]
+  }
+
+  /**
+   * LandTransportation findFirstOrThrow
+   */
+  export type LandTransportationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * Filter, which LandTransportation to fetch.
+     */
+    where?: LandTransportationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LandTransportations to fetch.
+     */
+    orderBy?: LandTransportationOrderByWithRelationInput | LandTransportationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LandTransportations.
+     */
+    cursor?: LandTransportationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LandTransportations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LandTransportations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LandTransportations.
+     */
+    distinct?: LandTransportationScalarFieldEnum | LandTransportationScalarFieldEnum[]
+  }
+
+  /**
+   * LandTransportation findMany
+   */
+  export type LandTransportationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * Filter, which LandTransportations to fetch.
+     */
+    where?: LandTransportationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LandTransportations to fetch.
+     */
+    orderBy?: LandTransportationOrderByWithRelationInput | LandTransportationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LandTransportations.
+     */
+    cursor?: LandTransportationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LandTransportations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LandTransportations.
+     */
+    skip?: number
+    distinct?: LandTransportationScalarFieldEnum | LandTransportationScalarFieldEnum[]
+  }
+
+  /**
+   * LandTransportation create
+   */
+  export type LandTransportationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * The data needed to create a LandTransportation.
+     */
+    data: XOR<LandTransportationCreateInput, LandTransportationUncheckedCreateInput>
+  }
+
+  /**
+   * LandTransportation createMany
+   */
+  export type LandTransportationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LandTransportations.
+     */
+    data: LandTransportationCreateManyInput | LandTransportationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LandTransportation createManyAndReturn
+   */
+  export type LandTransportationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * The data used to create many LandTransportations.
+     */
+    data: LandTransportationCreateManyInput | LandTransportationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LandTransportation update
+   */
+  export type LandTransportationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * The data needed to update a LandTransportation.
+     */
+    data: XOR<LandTransportationUpdateInput, LandTransportationUncheckedUpdateInput>
+    /**
+     * Choose, which LandTransportation to update.
+     */
+    where: LandTransportationWhereUniqueInput
+  }
+
+  /**
+   * LandTransportation updateMany
+   */
+  export type LandTransportationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LandTransportations.
+     */
+    data: XOR<LandTransportationUpdateManyMutationInput, LandTransportationUncheckedUpdateManyInput>
+    /**
+     * Filter which LandTransportations to update
+     */
+    where?: LandTransportationWhereInput
+    /**
+     * Limit how many LandTransportations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LandTransportation updateManyAndReturn
+   */
+  export type LandTransportationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * The data used to update LandTransportations.
+     */
+    data: XOR<LandTransportationUpdateManyMutationInput, LandTransportationUncheckedUpdateManyInput>
+    /**
+     * Filter which LandTransportations to update
+     */
+    where?: LandTransportationWhereInput
+    /**
+     * Limit how many LandTransportations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LandTransportation upsert
+   */
+  export type LandTransportationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * The filter to search for the LandTransportation to update in case it exists.
+     */
+    where: LandTransportationWhereUniqueInput
+    /**
+     * In case the LandTransportation found by the `where` argument doesn't exist, create a new LandTransportation with this data.
+     */
+    create: XOR<LandTransportationCreateInput, LandTransportationUncheckedCreateInput>
+    /**
+     * In case the LandTransportation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LandTransportationUpdateInput, LandTransportationUncheckedUpdateInput>
+  }
+
+  /**
+   * LandTransportation delete
+   */
+  export type LandTransportationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+    /**
+     * Filter which LandTransportation to delete.
+     */
+    where: LandTransportationWhereUniqueInput
+  }
+
+  /**
+   * LandTransportation deleteMany
+   */
+  export type LandTransportationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LandTransportations to delete
+     */
+    where?: LandTransportationWhereInput
+    /**
+     * Limit how many LandTransportations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LandTransportation without action
+   */
+  export type LandTransportationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandTransportation
+     */
+    select?: LandTransportationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LandTransportation
+     */
+    omit?: LandTransportationOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10814,6 +12068,27 @@ export namespace Prisma {
   };
 
   export type RestaurantScalarFieldEnum = (typeof RestaurantScalarFieldEnum)[keyof typeof RestaurantScalarFieldEnum]
+
+
+  export const LandTransportationScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    vehicleType: 'vehicleType',
+    capacity: 'capacity',
+    operator: 'operator',
+    contactNumber: 'contactNumber',
+    baseFee: 'baseFee',
+    feeDescription: 'feeDescription',
+    imageUrl_1: 'imageUrl_1',
+    imageUrl_2: 'imageUrl_2',
+    imageUrl_3: 'imageUrl_3',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
+  };
+
+  export type LandTransportationScalarFieldEnum = (typeof LandTransportationScalarFieldEnum)[keyof typeof LandTransportationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11719,6 +12994,110 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Restaurant"> | Date | string | null
   }
 
+  export type LandTransportationWhereInput = {
+    AND?: LandTransportationWhereInput | LandTransportationWhereInput[]
+    OR?: LandTransportationWhereInput[]
+    NOT?: LandTransportationWhereInput | LandTransportationWhereInput[]
+    id?: StringFilter<"LandTransportation"> | string
+    name?: StringFilter<"LandTransportation"> | string
+    description?: StringFilter<"LandTransportation"> | string
+    vehicleType?: StringNullableFilter<"LandTransportation"> | string | null
+    capacity?: IntNullableFilter<"LandTransportation"> | number | null
+    operator?: StringNullableFilter<"LandTransportation"> | string | null
+    contactNumber?: StringNullableFilter<"LandTransportation"> | string | null
+    baseFee?: FloatNullableFilter<"LandTransportation"> | number | null
+    feeDescription?: StringNullableFilter<"LandTransportation"> | string | null
+    imageUrl_1?: StringNullableFilter<"LandTransportation"> | string | null
+    imageUrl_2?: StringNullableFilter<"LandTransportation"> | string | null
+    imageUrl_3?: StringNullableFilter<"LandTransportation"> | string | null
+    createdAt?: DateTimeFilter<"LandTransportation"> | Date | string
+    updatedAt?: DateTimeFilter<"LandTransportation"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"LandTransportation"> | Date | string | null
+  }
+
+  export type LandTransportationOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    vehicleType?: SortOrderInput | SortOrder
+    capacity?: SortOrderInput | SortOrder
+    operator?: SortOrderInput | SortOrder
+    contactNumber?: SortOrderInput | SortOrder
+    baseFee?: SortOrderInput | SortOrder
+    feeDescription?: SortOrderInput | SortOrder
+    imageUrl_1?: SortOrderInput | SortOrder
+    imageUrl_2?: SortOrderInput | SortOrder
+    imageUrl_3?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+  }
+
+  export type LandTransportationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LandTransportationWhereInput | LandTransportationWhereInput[]
+    OR?: LandTransportationWhereInput[]
+    NOT?: LandTransportationWhereInput | LandTransportationWhereInput[]
+    name?: StringFilter<"LandTransportation"> | string
+    description?: StringFilter<"LandTransportation"> | string
+    vehicleType?: StringNullableFilter<"LandTransportation"> | string | null
+    capacity?: IntNullableFilter<"LandTransportation"> | number | null
+    operator?: StringNullableFilter<"LandTransportation"> | string | null
+    contactNumber?: StringNullableFilter<"LandTransportation"> | string | null
+    baseFee?: FloatNullableFilter<"LandTransportation"> | number | null
+    feeDescription?: StringNullableFilter<"LandTransportation"> | string | null
+    imageUrl_1?: StringNullableFilter<"LandTransportation"> | string | null
+    imageUrl_2?: StringNullableFilter<"LandTransportation"> | string | null
+    imageUrl_3?: StringNullableFilter<"LandTransportation"> | string | null
+    createdAt?: DateTimeFilter<"LandTransportation"> | Date | string
+    updatedAt?: DateTimeFilter<"LandTransportation"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"LandTransportation"> | Date | string | null
+  }, "id">
+
+  export type LandTransportationOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    vehicleType?: SortOrderInput | SortOrder
+    capacity?: SortOrderInput | SortOrder
+    operator?: SortOrderInput | SortOrder
+    contactNumber?: SortOrderInput | SortOrder
+    baseFee?: SortOrderInput | SortOrder
+    feeDescription?: SortOrderInput | SortOrder
+    imageUrl_1?: SortOrderInput | SortOrder
+    imageUrl_2?: SortOrderInput | SortOrder
+    imageUrl_3?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    _count?: LandTransportationCountOrderByAggregateInput
+    _avg?: LandTransportationAvgOrderByAggregateInput
+    _max?: LandTransportationMaxOrderByAggregateInput
+    _min?: LandTransportationMinOrderByAggregateInput
+    _sum?: LandTransportationSumOrderByAggregateInput
+  }
+
+  export type LandTransportationScalarWhereWithAggregatesInput = {
+    AND?: LandTransportationScalarWhereWithAggregatesInput | LandTransportationScalarWhereWithAggregatesInput[]
+    OR?: LandTransportationScalarWhereWithAggregatesInput[]
+    NOT?: LandTransportationScalarWhereWithAggregatesInput | LandTransportationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LandTransportation"> | string
+    name?: StringWithAggregatesFilter<"LandTransportation"> | string
+    description?: StringWithAggregatesFilter<"LandTransportation"> | string
+    vehicleType?: StringNullableWithAggregatesFilter<"LandTransportation"> | string | null
+    capacity?: IntNullableWithAggregatesFilter<"LandTransportation"> | number | null
+    operator?: StringNullableWithAggregatesFilter<"LandTransportation"> | string | null
+    contactNumber?: StringNullableWithAggregatesFilter<"LandTransportation"> | string | null
+    baseFee?: FloatNullableWithAggregatesFilter<"LandTransportation"> | number | null
+    feeDescription?: StringNullableWithAggregatesFilter<"LandTransportation"> | string | null
+    imageUrl_1?: StringNullableWithAggregatesFilter<"LandTransportation"> | string | null
+    imageUrl_2?: StringNullableWithAggregatesFilter<"LandTransportation"> | string | null
+    imageUrl_3?: StringNullableWithAggregatesFilter<"LandTransportation"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"LandTransportation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"LandTransportation"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"LandTransportation"> | Date | string | null
+  }
+
   export type UserCreateInput = {
     id?: string
     created_at?: Date | string
@@ -12618,6 +13997,132 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type LandTransportationCreateInput = {
+    id?: string
+    name: string
+    description: string
+    vehicleType?: string | null
+    capacity?: number | null
+    operator?: string | null
+    contactNumber?: string | null
+    baseFee?: number | null
+    feeDescription?: string | null
+    imageUrl_1?: string | null
+    imageUrl_2?: string | null
+    imageUrl_3?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type LandTransportationUncheckedCreateInput = {
+    id?: string
+    name: string
+    description: string
+    vehicleType?: string | null
+    capacity?: number | null
+    operator?: string | null
+    contactNumber?: string | null
+    baseFee?: number | null
+    feeDescription?: string | null
+    imageUrl_1?: string | null
+    imageUrl_2?: string | null
+    imageUrl_3?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type LandTransportationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    vehicleType?: NullableStringFieldUpdateOperationsInput | string | null
+    capacity?: NullableIntFieldUpdateOperationsInput | number | null
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baseFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    feeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_1?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_2?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_3?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LandTransportationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    vehicleType?: NullableStringFieldUpdateOperationsInput | string | null
+    capacity?: NullableIntFieldUpdateOperationsInput | number | null
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baseFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    feeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_1?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_2?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_3?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LandTransportationCreateManyInput = {
+    id?: string
+    name: string
+    description: string
+    vehicleType?: string | null
+    capacity?: number | null
+    operator?: string | null
+    contactNumber?: string | null
+    baseFee?: number | null
+    feeDescription?: string | null
+    imageUrl_1?: string | null
+    imageUrl_2?: string | null
+    imageUrl_3?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type LandTransportationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    vehicleType?: NullableStringFieldUpdateOperationsInput | string | null
+    capacity?: NullableIntFieldUpdateOperationsInput | number | null
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baseFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    feeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_1?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_2?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_3?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LandTransportationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    vehicleType?: NullableStringFieldUpdateOperationsInput | string | null
+    capacity?: NullableIntFieldUpdateOperationsInput | number | null
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    contactNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baseFee?: NullableFloatFieldUpdateOperationsInput | number | null
+    feeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_1?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_2?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl_3?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type UuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -13380,6 +14885,70 @@ export namespace Prisma {
   export type RestaurantSumOrderByAggregateInput = {
     latitude?: SortOrder
     longitude?: SortOrder
+  }
+
+  export type LandTransportationCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    vehicleType?: SortOrder
+    capacity?: SortOrder
+    operator?: SortOrder
+    contactNumber?: SortOrder
+    baseFee?: SortOrder
+    feeDescription?: SortOrder
+    imageUrl_1?: SortOrder
+    imageUrl_2?: SortOrder
+    imageUrl_3?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type LandTransportationAvgOrderByAggregateInput = {
+    capacity?: SortOrder
+    baseFee?: SortOrder
+  }
+
+  export type LandTransportationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    vehicleType?: SortOrder
+    capacity?: SortOrder
+    operator?: SortOrder
+    contactNumber?: SortOrder
+    baseFee?: SortOrder
+    feeDescription?: SortOrder
+    imageUrl_1?: SortOrder
+    imageUrl_2?: SortOrder
+    imageUrl_3?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type LandTransportationMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    vehicleType?: SortOrder
+    capacity?: SortOrder
+    operator?: SortOrder
+    contactNumber?: SortOrder
+    baseFee?: SortOrder
+    feeDescription?: SortOrder
+    imageUrl_1?: SortOrder
+    imageUrl_2?: SortOrder
+    imageUrl_3?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type LandTransportationSumOrderByAggregateInput = {
+    capacity?: SortOrder
+    baseFee?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {

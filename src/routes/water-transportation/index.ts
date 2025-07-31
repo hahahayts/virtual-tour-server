@@ -123,7 +123,7 @@ export const updateWaterTransportationRoute = createRoute({
           schema: ResponseMessageSchema,
         },
       },
-      description: "Accommodation not found",
+      description: "Water transportation not found",
     },
 
     500: {

@@ -1,6 +1,7 @@
 import accommodationRoutes from "./accommodation/route.js";
 import { authRoutes } from "./auth/route.js";
 import destinationRoutes from "./destination/route.js";
+import landTransportationRoutes from "./land-transportation/route.js";
 import restaurantRoutes from "./restaurant/route.js";
 import taskRoutes from "./task/route.js";
 import usersRoute from "./user/routes.js";
@@ -11,6 +12,7 @@ const routes = [
   destinationRoutes,
   accommodationRoutes,
   waterTransportationRoutes,
+  landTransportationRoutes,
   restaurantRoutes,
   usersRoute,
   taskRoutes,
