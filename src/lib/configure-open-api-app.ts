@@ -1,3 +1,4 @@
+import JWTMiddleware from "@/middlewares/token.js";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { Scalar } from "@scalar/hono-api-reference";
 import { cors } from "hono/cors";
@@ -20,10 +21,21 @@ export default function configureOpenApiApp() {
       credentials: true,
     })
   );
-  app.onError((err, c) => {
-    console.error(`${err}`);
-    return c.text("Custom Error Message", 500);
+  app.use("*", async (c, next) => {
+    const path = c.req.path;
+
+    // Skip JWT middleware for /doc and /reference
+    if (path.startsWith("/doc") || path.startsWith("/reference")) {
+      return await next();
+    }
+
+    return await JWTMiddleware(c, next);
   });
+
+  // app.onError((err, c) => {
+  //   console.error(`${err}`);
+  //   return c.text("Custom Error Message", 500);
+  // });
 
   app.doc("/doc", {
     openapi: "3.0.0",

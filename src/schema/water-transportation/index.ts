@@ -7,6 +7,10 @@ export const WaterTransportationSchema = z.object({
   expected_fee: z.number().nonnegative(),
   departure_days: z.array(z.string()), // Assumes it's an array of strings like ["Monday", "Wednesday"]
   departure_time: z.string().min(1),
+  guidelines_and_policies: z.string().max(10000),
+  rebooking_supercharges: z.string().max(10000),
+  refund_policy: z.string().max(10000),
+  duration: z.number().nonnegative().nullable(),
 
   imageUrl_1: z.string().max(2048).nullable(),
   imageUrl_2: z.string().max(2048).nullable(),

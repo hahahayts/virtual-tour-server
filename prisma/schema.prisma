@@ -96,8 +96,8 @@ model Destination {
 
   // Location
   address   String? @db.Text // Longer addresses allowed
-  latitude  Float? // 6 decimal places (~10cm precision)
-  longitude Float?
+  latitude  Float?  @map("latittue") // 6 decimal places (~10cm precision)
+  longitude Float?  @map("longitude")
 
   // Media (URLs)
   three_sixty_imageUrl String? @db.VarChar(2048)

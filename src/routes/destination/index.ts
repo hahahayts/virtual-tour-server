@@ -13,6 +13,7 @@ const tags = ["Destination"];
 export const getDestinationsRoute = createRoute({
   method: "get",
   path: "/destinations",
+  
   tags,
   description: "Get all destinations",
   summary: "Retrieve a list of all destinations",
