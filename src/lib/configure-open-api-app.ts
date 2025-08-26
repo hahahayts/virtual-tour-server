@@ -21,16 +21,17 @@ export default function configureOpenApiApp() {
       credentials: true,
     })
   );
-  app.use("*", async (c, next) => {
-    const path = c.req.path;
+  // Middleware for have an access
+  // app.use("*", async (c, next) => {
+  //   const path = c.req.path;
 
-    // Skip JWT middleware for /doc and /reference
-    if (path.startsWith("/doc") || path.startsWith("/reference")) {
-      return await next();
-    }
+  //   // Skip JWT middleware for /doc and /reference
+  //   if (path.startsWith("/doc") || path.startsWith("/reference")) {
+  //     return await next();
+  //   }
 
-    return await JWTMiddleware(c, next);
-  });
+  //   return await JWTMiddleware(c, next);
+  // });
 
   // app.onError((err, c) => {
   //   console.error(`${err}`);

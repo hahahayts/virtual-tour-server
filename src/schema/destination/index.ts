@@ -4,6 +4,7 @@ export const DestinationSchema = z.object({
   id: z.string(),
   name: z.string().min(1).max(255),
   description: z.string().min(1).max(10000),
+  transpo_info: z.string().max(10000),
   address: z.string().max(500).nullable(),
 
   // Contact Information
@@ -56,6 +57,7 @@ export const DestinationListSchema = z.object({
 export const CreateDestinationSchema = z.object({
   name: z.string().min(1).max(255),
   description: z.string().min(1).max(10000),
+  transpo_info: z.string().max(10000),
   address: z.string().max(500).nullable(),
   email: z.string().max(320).nullable(),
   phone: z.string().max(20).nullable(),

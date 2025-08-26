@@ -30,3 +30,5 @@ export const LoginSchema = z.object({
 export const LoginDataSchema = z.object({
   accessToken: z.string(),
 });
+
+export const UpdateUserSchema = RegisterSchema.optional();

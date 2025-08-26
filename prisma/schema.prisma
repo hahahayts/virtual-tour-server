@@ -36,7 +36,7 @@ model User {
   last_name  String?
   email      String    @unique
 
-  role UserRoleType @default(USER)
+  role UserRoleType @default(ADMIN)
 
   // Indexes
   @@index([created_at])
@@ -85,8 +85,9 @@ model Destination {
   id String @id @default(cuid())
 
   // Core Fields
-  name        String @db.VarChar(255)
-  description String @db.Text
+  name         String @db.VarChar(255)
+  description  String @db.Text
+  transpo_info String @db.Text
 
   // Contact Information (Validated Lengths)
   email    String? @db.VarChar(320) // Max email length per RFC
@@ -96,8 +97,8 @@ model Destination {
 
   // Location
   address   String? @db.Text // Longer addresses allowed
-  latitude  Float?  @map("latittue") // 6 decimal places (~10cm precision)
-  longitude Float?  @map("longitude")
+  latitude  Float?
+  longitude Float?
 
   // Media (URLs)
   three_sixty_imageUrl String? @db.VarChar(2048)
@@ -245,4 +246,28 @@ model LandTransportation {
   deletedAt DateTime?
 
   @@index([name])
+}
+
+model History {
+  id          String    @id @default(cuid())
+  name        String    @db.VarChar(255)
+  description String    @db.Text
+  imageUrl_1  String?   @db.VarChar(2048)
+  imageUrl_2  String?   @db.VarChar(2048)
+  imageUrl_3  String?   @db.VarChar(2048)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+}
+
+model About {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  description String    @db.Text
+  imageUrl_1  String?   @db.VarChar(2048)
+  imageUrl_2  String?   @db.VarChar(2048)
+  imageUrl_3  String?   @db.VarChar(2048)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
 }
