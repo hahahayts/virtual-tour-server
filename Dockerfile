@@ -1,27 +1,20 @@
-# Uses Node.js version 22
 FROM node:lts-alpine
 
-USER node
-
-# Create app directory
 WORKDIR /home/node
 
-# Copy package.json and lock first (for better caching)
+# Copy package files first
 COPY package*.json ./
 
 # Install dependencies
 RUN npm ci
 
-# Copy app source code
+# Copy source code
 COPY . .
 
-# Generate Prisma client
+# Change ownership to node user and generate Prisma client
+RUN chown -R node:node /home/node
+USER node
 RUN npx prisma generate
 
-# Build TypeScript
-RUN npm run build
-
-ARG PORT
-EXPOSE ${PORT:-3000}
-
-CMD ["npm", "run", "start"]
+# Your app startup command here
+CMD ["npm", "start"]
