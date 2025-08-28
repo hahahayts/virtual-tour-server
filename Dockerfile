@@ -1,19 +1,23 @@
-
-#Uses Node.js version 22
+# Use Node.js LTS Alpine for smaller image
 FROM node:lts-alpine
 
-USER node
-
-# Create app directory
+# Set working directory
 WORKDIR /home/node
 
-#Copy app source code
-COPY . .
+# Copy package files first for better caching
+COPY package*.json ./
 
+# Install dependencies
 RUN npm ci
 
-ARG PORT
+# Copy the rest of the app
+COPY . .
 
-EXPOSE ${PORT:-3000}
+# Build the TypeScript code (outputs dist/)
+RUN npm run build
 
+# Expose backend port
+EXPOSE 3000
+
+# Run the app
 CMD ["npm", "run", "start"]
