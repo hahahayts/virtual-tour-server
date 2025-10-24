@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  // output   = "../src/db/generated/prisma"
+  output   = "../src/db/generated/prisma"
 }
 
 datasource db {
@@ -111,6 +111,9 @@ model Destination {
 
   // Statistics
   count Int? @default(0)
+
+  // Rating
+  ratings Rating[]
 
   // Timestamps
   createdAt DateTime  @default(now())
@@ -270,4 +273,22 @@ model About {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
+}
+
+model Rating {
+  id          String  @id @default(cuid())
+  score       Int // Example: 1 to 5
+  comment     String? @db.Text
+  mac_address String? @db.VarChar(17) // If anonymous or device-based
+
+  // Relations to possible rated entities
+  destinationId String?
+  destination   Destination? @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Prevent duplicate ratings (same user/device per entity)
+
+  @@unique([mac_address, destinationId])
 }

@@ -1,8 +1,10 @@
 import aboutRoutes from "./about/route.js";
 import accommodationRoutes from "./accommodation/route.js";
 import { authRoutes } from "./auth/route.js";
+import commentRoutes from "./rating-comments/route.js";
 import dashboardRoutes from "./dashboard/route.js";
 import destinationRoutes from "./destination/route.js";
+import macAddressRoute from "./get-address/route.js";
 import historyRoutes from "./history/route.js";
 import landTransportationRoutes from "./land-transportation/route.js";
 import restaurantRoutes from "./restaurant/route.js";
@@ -22,6 +24,8 @@ const routes = [
   usersRoute,
   taskRoutes,
   dashboardRoutes,
+  macAddressRoute,
+  commentRoutes,
 ] as const;
 
 export type Routes = typeof routes;
