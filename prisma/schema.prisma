@@ -280,6 +280,7 @@ model Rating {
   score       Int // Example: 1 to 5
   comment     String? @db.Text
   mac_address String? @db.VarChar(17) // If anonymous or device-based
+  is_display  Boolean @default(false)
 
   // Relations to possible rated entities
   destinationId String?
@@ -291,4 +292,16 @@ model Rating {
   // Prevent duplicate ratings (same user/device per entity)
 
   @@unique([mac_address, destinationId])
+}
+
+model Visit {
+  id         Int      @id @default(autoincrement())
+  macAddress String
+  month      String // e.g. "January"
+  year       Int
+  visitCount Int      @default(1)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([macAddress, month, year]) // one record per mac per month
 }
