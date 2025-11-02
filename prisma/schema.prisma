@@ -290,7 +290,6 @@ model Rating {
   updatedAt DateTime @updatedAt
 
   // Prevent duplicate ratings (same user/device per entity)
-
   @@unique([mac_address, destinationId])
 }
 

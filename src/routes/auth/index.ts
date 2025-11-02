@@ -7,7 +7,7 @@ import {
   UserSchema,
 } from "@/schema/auth/index.js";
 import { ResponseMessageSchema } from "@/schema/response-message.js";
-import { createRoute } from "@hono/zod-openapi";
+import { createRoute, z } from "@hono/zod-openapi";
 
 const tags = ["Auth"];
 
@@ -152,7 +152,77 @@ export const logoutRoute = createRoute({
   },
 });
 
+export const changePasswordRoute = createRoute({
+  method: "patch",
+  path: "/auth/change-password",
+  tags,
+  description: "Change account password",
+  summary: "Change password for the authenticated user",
+  middleware: authMiddleware,
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: z
+            .object({
+              old_password: z.string().min(6).openapi({
+                example: "oldPassword123",
+              }),
+              new_password: z.string().min(6).openapi({
+                example: "newSecurePassword456",
+              }),
+            })
+            .openapi("ChangePasswordSchema"),
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      description: "Password updated successfully",
+      content: {
+        "application/json": {
+          schema: ResponseMessageSchema,
+        },
+      },
+    },
+    400: {
+      description: "Invalid current password",
+      content: {
+        "application/json": {
+          schema: ResponseMessageSchema,
+        },
+      },
+    },
+    401: {
+      description: "Unauthorized",
+      content: {
+        "application/json": {
+          schema: ResponseMessageSchema,
+        },
+      },
+    },
+    404: {
+      description: "Account not found",
+      content: {
+        "application/json": {
+          schema: ResponseMessageSchema,
+        },
+      },
+    },
+    500: {
+      description: "Failed to update password",
+      content: {
+        "application/json": {
+          schema: ResponseMessageSchema,
+        },
+      },
+    },
+  },
+});
+
 export type RegisterRoute = typeof registerRoute;
 export type LoginRoute = typeof loginRoute;
 export type GetMeRoute = typeof getMeRoute;
 export type LogoutRoute = typeof logoutRoute; // Fixed - was pointing to loginRoute
+export type ChangePasswordRoute = typeof changePasswordRoute;

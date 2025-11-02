@@ -4,7 +4,8 @@ export const RatingSchema = z.object({
   id: z.string().openapi({ example: "ckx123abc456" }),
   score: z.number().int().min(1).max(5).openapi({ example: 4 }),
   comment: z.string().max(10000).nullable().optional(),
-  
+  is_display: z.boolean().optional().default(false),
+
   mac_address: z
     .string()
     .max(17)
@@ -24,7 +25,7 @@ export const RatingListSchema = z.object({
 export const CreateRatingSchema = z.object({
   score: z.number().int().min(1).max(5),
   comment: z.string().max(10000).optional(),
-  mac_address: z.string().max(17),
+  mac_address: z.string().max(17).optional(),
   destinationId: z.string().optional().nullable(),
 });
 

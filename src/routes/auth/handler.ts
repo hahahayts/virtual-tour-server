@@ -1,5 +1,6 @@
 import { authMiddleware } from "@/middlewares/auth.js";
 import type {
+  ChangePasswordRoute,
   GetMeRoute,
   LoginRoute,
   LogoutRoute,
@@ -148,5 +149,44 @@ export const logoutHandler: AppRouteHandler<LogoutRoute> = async (c) => {
     return c.json({ message: "Logged out successfully" }, 200);
   } catch (error) {
     return c.json({ message: "Failed to logout" }, 500);
+  }
+};
+
+export const changePasswordHandler: AppRouteHandler<ChangePasswordRoute> = async (c) => {
+  const session = c.get("session") as Session;
+  const { old_password, new_password } = c.req.valid("json");
+
+  try {
+    const account = await prisma.account.findUnique({
+      where: { id: session.account_id },
+    });
+
+    if (!account) {
+      return c.json({ message: "Account not found" }, 404);
+    }
+
+    const isValid = bcrypt.compareSync(old_password, account.password);
+    if (!isValid) {
+      return c.json({ message: "Incorrect current password" }, 400);
+    }
+
+    const hashedNewPassword = await bcrypt.hash(new_password, 12);
+
+    // Update password and clear refresh tokens
+    await prisma.$transaction(async (tx) => {
+      await tx.account.update({
+        where: { id: account.id },
+        data: { password: hashedNewPassword },
+      });
+
+      await tx.refreshToken.deleteMany({
+        where: { account_id: account.id },
+      });
+    });
+
+    return c.json({ message: "Password updated successfully" }, 200);
+  } catch (error) {
+    console.error("Change password error:", error);
+    return c.json({ message: "Failed to change password" }, 500);
   }
 };
