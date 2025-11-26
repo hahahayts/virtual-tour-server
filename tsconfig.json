@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
+    "target": "ES2023",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "strict": true,
-    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "ignoreDeprecations": "5.0",
+    // "verbatimModuleSyntax": true,
     "skipLibCheck": true,
     "types": ["node"],
     "jsx": "react-jsx",

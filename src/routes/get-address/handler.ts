@@ -1,5 +1,8 @@
 import type { AppRouteHandler } from "@/schema/route-handler.js";
-import type { GetMacAddressRoute } from "./index.js";
+import type {
+  GetDestinationVisitStatsRoute,
+  GetMacAddressRoute,
+} from "./index.js";
 import macAddress from "macaddress";
 import { prisma } from "@/lib/prisma.js";
 
@@ -68,6 +71,46 @@ export const getMacAddressHandler: AppRouteHandler<GetMacAddressRoute> = async (
     );
   } catch (error) {
     console.error("Error logging visit:", error);
+    return c.json({ error: "Internal Server Error" }, 500);
+  }
+};
+
+export const getDestinationVisitStatsHandler: AppRouteHandler<
+  GetDestinationVisitStatsRoute
+> = async (c) => {
+  try {
+    const { destinationId } = c.req.valid("param");
+    const year = new Date().getFullYear();
+
+    const visits = await prisma.destinationVisits.groupBy({
+      by: ["month"],
+      _count: { id: true },
+      where: { destinationId, year },
+    });
+
+    const MONTHS = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const chartData = MONTHS.map((m) => ({
+      month: m,
+      visited: visits.find((v) => v.month === m)?._count.id ?? 0,
+    }));
+
+    return c.json({ chartData }, 200);
+  } catch (error) {
+    console.error("Error fetching destination stats:", error);
     return c.json({ error: "Internal Server Error" }, 500);
   }
 };

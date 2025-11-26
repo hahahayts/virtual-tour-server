@@ -39,4 +39,45 @@ export const getMacAddressRoute = createRoute({
   },
 });
 
+export const getDestinationVisitStatsRoute = createRoute({
+  method: "get",
+  path: "/destination-visit-stats/{destinationId}",
+  tags,
+  description: "Get monthly visit stats for a destination",
+  summary: "Retrieve destination visit statistics",
+  request: {
+    params: z.object({
+      destinationId: z.string().min(1).describe("Destination ID"),
+    }),
+  },
+  responses: {
+    200: {
+      description: "Destination visit stats retrieved",
+      content: {
+        "application/json": {
+          schema: z.object({
+            chartData: z.array(
+              z.object({
+                month: z.string(),
+                visited: z.number(),
+              })
+            ),
+          }),
+        },
+      },
+    },
+    500: {
+      description: "Internal Server Error",
+      content: {
+        "application/json": {
+          schema: z.object({ error: z.string() }),
+        },
+      },
+    },
+  },
+});
+
+export type GetDestinationVisitStatsRoute =
+  typeof getDestinationVisitStatsRoute;
+
 export type GetMacAddressRoute = typeof getMacAddressRoute;
