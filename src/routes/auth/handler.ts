@@ -86,17 +86,17 @@ export const loginHandler: AppRouteHandler<LoginRoute> = async (c) => {
 
   setCookie(c, "auth__accessToken", accessToken, {
     path: "/",
-    sameSite: "Lax",
+    sameSite: "None",
     httpOnly: true,
-    secure: false,
+    secure: true,
     expires: new Date(Date.now() + 1000 * 60),
   });
 
   setCookie(c, "auth__refreshToken", refreshToken, {
     path: "/",
-    sameSite: "Lax",
+    sameSite: "None",
     httpOnly: true,
-    secure: false,
+    secure: true,
     expires: new Date(Date.now() + 1000 * 60),
   });
 
@@ -152,7 +152,9 @@ export const logoutHandler: AppRouteHandler<LogoutRoute> = async (c) => {
   }
 };
 
-export const changePasswordHandler: AppRouteHandler<ChangePasswordRoute> = async (c) => {
+export const changePasswordHandler: AppRouteHandler<
+  ChangePasswordRoute
+> = async (c) => {
   const session = c.get("session") as Session;
   const { old_password, new_password } = c.req.valid("json");
 
