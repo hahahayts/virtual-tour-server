@@ -56,7 +56,10 @@ export const createTask: AppRouteHandler<CreateTaskRoute> = async (c) => {
 
     return c.json(task, 200);
   } catch (error) {
-    return c.json({ message: error }, 500);
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to create task";
+
+    return c.json({ message: errorMessage }, 500);
   }
 };
 
@@ -70,7 +73,10 @@ export const deleteTask: AppRouteHandler<DeleteTaskRoute> = async (c) => {
 
     return c.json({ message: "Task deleted successfully" }, 200);
   } catch (error) {
-    return c.json({ message: error }, 500);
+     const errorMessage =
+      error instanceof Error ? error.message : "Failed to create task";
+
+    return c.json({ message: errorMessage }, 500);
   }
 };
 
@@ -100,6 +106,9 @@ export const updateTask: AppRouteHandler<UpdateTaskRoute> = async (c) => {
 
     return c.json(task, 200);
   } catch (error) {
-    return c.json({ message: error }, 500);
+     const errorMessage =
+      error instanceof Error ? error.message : "Failed to create task";
+
+    return c.json({ message: errorMessage }, 500);
   }
 };
