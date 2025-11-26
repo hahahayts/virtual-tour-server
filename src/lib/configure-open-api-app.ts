@@ -18,6 +18,7 @@ export default function configureOpenApiApp() {
         "https://your-frontend.onrender.com",
         "https://virtual-tour-server-1.onrender.com",
         "https://virtual-tour-server-2.onrender.com",
+        "https://virtual-tour-client-1ln9.onrender.com",
       ],
       allowMethods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       allowHeaders: ["Content-Type", "Authorization"],
