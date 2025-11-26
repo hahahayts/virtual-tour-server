@@ -13,7 +13,12 @@ export default function configureOpenApiApp() {
   app.use(
     "*",
     cors({
-      origin: ["http://localhost:5173"],
+      origin: [
+        "http://localhost:5173",
+        "https://your-frontend.onrender.com",
+        "https://virtual-tour-server-1.onrender.com",
+        "https://virtual-tour-server-2.onrender.com",
+      ],
       allowMethods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       allowHeaders: ["Content-Type", "Authorization"],
       exposeHeaders: ["Content-Length"],
