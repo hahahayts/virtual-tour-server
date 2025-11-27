@@ -43,7 +43,7 @@ export const getDestinationVisitStatsRoute = createRoute({
   method: "get",
   path: "/destination-visit-stats/{destinationId}",
   tags,
-  description: "Get monthly visit stats for a destination",
+  description: "Get monthly visit stats for a destination", 
   summary: "Retrieve destination visit statistics",
   request: {
     params: z.object({

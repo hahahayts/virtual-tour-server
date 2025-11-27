@@ -82,9 +82,10 @@ export const getDestinationVisitStatsHandler: AppRouteHandler<
     const { destinationId } = c.req.valid("param");
     const year = new Date().getFullYear();
 
+    // Get the unique MAC addresses that visited this destination per month
     const visits = await prisma.destinationVisits.groupBy({
       by: ["month"],
-      _count: { id: true },
+      _count: { macAddress: true }, // count unique MAC addresses
       where: { destinationId, year },
     });
 
@@ -103,9 +104,10 @@ export const getDestinationVisitStatsHandler: AppRouteHandler<
       "December",
     ];
 
+    // Map chartData, showing 0 if no visit for a month
     const chartData = MONTHS.map((m) => ({
       month: m,
-      visited: visits.find((v) => v.month === m)?._count.id ?? 0,
+      visited: visits.find((v) => v.month === m)?._count.macAddress ?? 0,
     }));
 
     return c.json({ chartData }, 200);
