@@ -75,17 +75,86 @@ export const getMacAddressHandler: AppRouteHandler<GetMacAddressRoute> = async (
   }
 };
 
+// export const getDestinationVisitStatsHandler: AppRouteHandler<
+//   GetDestinationVisitStatsRoute
+// > = async (c) => {
+//   try {
+//     const { destinationId } = c.req.valid("param");
+//     const year = new Date().getFullYear();
+
+//     // Get the unique MAC addresses that visited this destination per month
+//     const visits = await prisma.destinationVisits.groupBy({
+//       by: ["month"],
+//       _count: { macAddress: true }, // count unique MAC addresses
+//       where: { destinationId, year },
+//     });
+
+//     const MONTHS = [
+//       "January",
+//       "February",
+//       "March",
+//       "April",
+//       "May",
+//       "June",
+//       "July",
+//       "August",
+//       "September",
+//       "October",
+//       "November",
+//       "December",
+//     ];
+
+//     // Map chartData, showing 0 if no visit for a month
+//     const chartData = MONTHS.map((m) => ({
+//       month: m,
+//       visited: visits.find((v) => v.month === m)?._count.macAddress ?? 0,
+//     }));
+
+//     return c.json({ chartData }, 200);
+//   } catch (error) {
+//     console.error("Error fetching destination stats:", error);
+//     return c.json({ error: "Internal Server Error" }, 500);
+//   }
+// };
+
 export const getDestinationVisitStatsHandler: AppRouteHandler<
   GetDestinationVisitStatsRoute
 > = async (c) => {
   try {
     const { destinationId } = c.req.valid("param");
+    const currentMac = await macAddress.one(); // get server MAC (for demo)
+
+    const month = new Date().toLocaleString("default", { month: "long" });
     const year = new Date().getFullYear();
 
-    // Get the unique MAC addresses that visited this destination per month
+    // Check if this MAC already visited this destination this month
+    const existing = await prisma.destinationVisits.findUnique({
+      where: {
+        macAddress_month_year_destinationId: {
+          macAddress: currentMac,
+          month,
+          year,
+          destinationId,
+        },
+      },
+    });
+
+    // Log visit if first time this month for this destination
+    if (!existing) {
+      await prisma.destinationVisits.create({
+        data: {
+          macAddress: currentMac,
+          month,
+          year,
+          destinationId,
+        },
+      });
+    }
+
+    // Aggregate visits for chart (unique MAC per month)
     const visits = await prisma.destinationVisits.groupBy({
       by: ["month"],
-      _count: { macAddress: true }, // count unique MAC addresses
+      _count: { macAddress: true },
       where: { destinationId, year },
     });
 
@@ -104,13 +173,17 @@ export const getDestinationVisitStatsHandler: AppRouteHandler<
       "December",
     ];
 
-    // Map chartData, showing 0 if no visit for a month
     const chartData = MONTHS.map((m) => ({
       month: m,
       visited: visits.find((v) => v.month === m)?._count.macAddress ?? 0,
     }));
 
-    return c.json({ chartData }, 200);
+    return c.json(
+      {
+        chartData,
+      },
+      200
+    );
   } catch (error) {
     console.error("Error fetching destination stats:", error);
     return c.json({ error: "Internal Server Error" }, 500);
